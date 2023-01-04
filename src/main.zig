@@ -2,8 +2,7 @@ const std = @import("std");
 const testing = std.testing;
 
 const MessageType = enum(u4) {
-    Reserved1,
-    CONNECT,
+    CONNECT = 1,
     CONNACK,
     PUBLISH,
     PUBACK,
@@ -16,8 +15,7 @@ const MessageType = enum(u4) {
     UNSUBACK,
     PINGREQ,
     PINGRESP,
-    DISCONNECT,
-    Reserverd2  
+    DISCONNECT 
 };
 
 
@@ -36,4 +34,16 @@ test "Message type values" {
     try testing.expect(@enumToInt(MessageType.PINGREQ) == 12);
     try testing.expect(@enumToInt(MessageType.PINGRESP) == 13);
     try testing.expect(@enumToInt(MessageType.DISCONNECT) == 14);    
+}
+
+const QoS = enum(u2) {
+    FireAndForget,
+    AcknowledgedDelivery,
+    AssuredDelivery,
+};
+
+test "QoS values" {
+    try testing.expect(@enumToInt(QoS.FireAndForget) == 0);
+    try testing.expect(@enumToInt(QoS.AcknowledgedDelivery) == 1);
+    try testing.expect(@enumToInt(QoS.AssuredDelivery) == 2);
 }
